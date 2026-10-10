@@ -1,0 +1,12 @@
+docker exec -it containerID bash => truy cập vào bash container
+psql -U postgres => vào postgres bash
+\l : liệt kê cơ sở dữ liệu có trong container
+thoát ra gõ
+\c CatalogDb để connect
+\d xem bảng nào có trong db
+
+ctr + d: để thoát ra
+
+Xem mật khẩu & User
+docker inspect catalogDb --format '{{json .Config.Env}}' 
+
