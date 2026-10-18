@@ -5,6 +5,8 @@ services:
   image: postgres:17-alpine
  basketdb:
   image: postgres:17-alpine
+ distributedCache:
+  image: redis
  catalog.api:
    image: ${DOCKER_REGISTRY-}catalogapi
    build:
