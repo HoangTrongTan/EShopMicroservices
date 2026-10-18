@@ -10,7 +10,7 @@ public class StoreBasketEndpoints : ICarterModule
         {
             var command = request.Adapt<StoreBasketCommand>();
 
-            var result = sender.Send(command);
+            var result = await sender.Send(command);
 
             var response = result.Adapt<StoreBasketResponse>();
 
