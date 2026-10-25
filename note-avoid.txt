@@ -1,0 +1,21 @@
+**Primitive Obsession:
+Trong dự án Ordering, nếu cả orderId, customerId, và productId đều mang kiểu Guid
+public void ProcessOrder(Guid orderId, Guid customerId, Guid productId)
+{
+    // ...
+}
+Khi gọi hàm, chẳng may sếp hoa mắt truyền nhầm vị trí:   
+ProcessOrder(customerId, orderId, productId); // ❌ Truyền nhầm customerId vào chỗ orderId!
+
+**Giải pháp: (Strongly-Typed IDs Pattern)
+Thay vì dùng Guid trần trụi, người ta bọc Guid lại thành từng kiểu dữ liệu riêng biệt cho từng loại ID:
+// Tạo kiểu riêng biệt cho từng ID bằng record (Value Object)
+public record OrderId(Guid Value);
+public record CustomerId(Guid Value);
+public record ProductId(Guid Value);
+
+**Anemic vs Rich Domain Model
+🔴 Anemic Domain Model (Mô hình "Thiếu máu" / "Gầy gò")
+Đặc điểm: Entity chỉ là một cái bọc rỗng chứa dữ liệu (data container). Nó chỉ toàn properties kèm { get; set; } công khai, hoàn toàn không có hành vi/logic bên trong
+🟢 Rich Domain Model (Mô hình "Giàu có" / "Đầy đủ thịt mỡ")
+Đặc điểm: Entity đóng gói cả dữ liệu (Data) lẫn hành vi (Behavior).
