@@ -1,10 +1,12 @@
+using Discount.Grpc;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var assembly = typeof(Program).Assembly;
 //Add service for container
+//Aplication Service
+var assembly = typeof(Program).Assembly;
 builder.Services.AddCarter();
 builder.Services.AddMediatR(config =>
 {
@@ -12,6 +14,8 @@ builder.Services.AddMediatR(config =>
     config.AddOpenBehavior(typeof(ValidationBehavior<,>));
     config.AddOpenBehavior(typeof(LoggingBehavior<,>));
 });
+
+//Data Service
 builder.Services.AddMarten(opts =>
 {
     opts.Connection(builder.Configuration.GetConnectionString("Database")!);
@@ -19,7 +23,6 @@ builder.Services.AddMarten(opts =>
 }).UseLightweightSessions();
 builder.Services.AddValidatorsFromAssembly(assembly);
 builder.Services.AddScoped<IBasketRepository, BasketRepository>();
-
 //builder.Services.AddScoped<IBasketRepository>(provider =>
 //{
 //    var basketRepository = provider.GetRequiredService<BasketRepository>();
@@ -30,6 +33,12 @@ builder.Services.Decorate<IBasketRepository, CachedBasketRepository>();
 builder.Services.AddStackExchangeRedisCache(options =>
 {
     options.Configuration = builder.Configuration.GetConnectionString("Redis");
+});
+
+//gRpc Service
+builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(opts =>
+{
+    opts.Address = new Uri(builder.Configuration["GrpcSettings:DiscountUrl"]);
 });
 
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();

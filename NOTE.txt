@@ -10,3 +10,13 @@ ctr + d: để thoát ra
 Xem mật khẩu & User
 docker inspect catalogDb --format '{{json .Config.Env}}' 
 
+redis:
+docker exec -it distributedcache redis-cli
+KEYS *
+TYPE <tên_key>
+GET <tên_key>
+HGETALL <tên_key>
+TTL <tên_key>
+Xóa 1 key: DEL <tên_key>
+
+Xóa sạch sành sanh mọi cache: FLUSHALL
