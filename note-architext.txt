@@ -1,0 +1,14 @@
+KISS (Keep It Simple, Stupid!)
+Ý nghĩa: "Viết đơn giản thôi cho đời nó thanh thản, đừng màu mè làm phức tạp hóa vấn đề!" 🤡
+Bài toán chỉ cần 1 vòng for hay câu if đơn giản thì đừng cố nhét 3 cái Design Pattern vào để flex trình độ kẻo 3 tháng sau chính mình đọc lại cũng trầm cảm!
+
+YAGNI (You Aren't Gonna Need It)Ý nghĩa: "Cái gì chưa cần thì ĐỪNG CÓ VIẾT!" 
+🛑Nhiều ông dev hay bị bệnh "over-thinking", ngồi tưởng tượng: "Lỡ sau này khách hàng đòi cái này cái kia thì sao?" rồi ngồi code sẵn một đống logic thừa thãi. 
+Kết quả: tính năng đó 10 năm sau cũng không ai dùng, chỉ tổ làm nặng codebase!
+
+4. SoC (Separation of Concerns - Phân tách mối bận tâm)
+Ý nghĩa: "Việc của ai người nấy lo, nước sông không phạm nước giếng!" 
+🧱Chia ứng dụng thành nhiều tầng/lớp riêng biệt:Tầng Controller/API: Chỉ lo nhận request, validate, trả response.Tầng Application/Business Logic: Lo tính toán logic nghiệp vụ giỏ hàng, giảm giá.
+Tầng Infrastructure: Chỉ lo kết nối PostgreSQL, Redis, ném event vào RabbitMQ.
+5. DIP (Dependency Inversion Principle)   
+Chính là chữ D trong SOLID đấy sếp!   Thay vì BasketService đi khởi tạo trực tiếp new BasketRepository(), ta tiêm IBasketRepository qua Constructor (kết hợp với Dependency Injection - DI). Sau này muốn đổi từ Postgres sang MongoDB chỉ cần viết class mới và cắm lại trong Program.cs, không phải sửa một dòng logic nào của service! 🔌⚡   
