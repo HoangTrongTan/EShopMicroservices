@@ -12,3 +12,6 @@ Kết quả: tính năng đó 10 năm sau cũng không ai dùng, chỉ tổ làm
 Tầng Infrastructure: Chỉ lo kết nối PostgreSQL, Redis, ném event vào RabbitMQ.
 5. DIP (Dependency Inversion Principle)   
 Chính là chữ D trong SOLID đấy sếp!   Thay vì BasketService đi khởi tạo trực tiếp new BasketRepository(), ta tiêm IBasketRepository qua Constructor (kết hợp với Dependency Injection - DI). Sau này muốn đổi từ Postgres sang MongoDB chỉ cần viết class mới và cắm lại trong Program.cs, không phải sửa một dòng logic nào của service! 🔌⚡   
+
+code luôn phan tao, xoa owr model luoon.
+
