@@ -17,5 +17,15 @@ code luôn phan tao, xoa owr model luoon.
 
 mỗi thực thể chịu trách nhiệm cho các hành vi của nó, xác thực trang thái của chính nó và đảm bảo tính nhất quán.
 
+Sự khác biệt giữa Domain Event và Integration trong kiến trúc DDD (Domain-Driven Design) và Microservices
+Domain Event là gì?
+Phạm vi hoạt động
+Giải quyết bài toán gì?
+
+Integration Event
+Phạm vi
+Hình thức giao tiếp
+Mục đích
+
 
 
