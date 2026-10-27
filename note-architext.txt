@@ -15,3 +15,7 @@ Chính là chữ D trong SOLID đấy sếp!   Thay vì BasketService đi khởi
 
 code luôn phan tao, xoa owr model luoon.
 
+mỗi thực thể chịu trách nhiệm cho các hành vi của nó, xác thực trang thái của chính nó và đảm bảo tính nhất quán.
+
+
+
