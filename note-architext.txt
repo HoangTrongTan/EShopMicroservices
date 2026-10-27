@@ -27,5 +27,14 @@ Phạm vi
 Hình thức giao tiếp
 Mục đích
 
+kiểu phức hợp như value object
 
+Entity Framework Core là gì? 📦
+Bản chất (O/RM - Object-Relational Mapper)
+Đặc tính:
+Lợi ích to lớn nhất:
+
+EF Core Tools (Bộ công cụ chạy Migration) 🛠️
+NET Core CLI (Dành cho Terminal / Cross-platform) 🐧💻
+Package Manager Console - PMC
 
