@@ -1,10 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Ordering.Domain.Enums;
-using Ordering.Domain.Models;
-using Ordering.Domain.ValueObjects;
-
-namespace Ordering.Infrastructure.Data.Configurations;
+﻿namespace Ordering.Infrastructure.Data.Configurations;
 
 public class OrderConfiguration : IEntityTypeConfiguration<Order>
 {
@@ -44,6 +38,18 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
                 addressBuilder.Property(a => a.Country).HasMaxLength(50);
                 addressBuilder.Property(a => a.State).HasMaxLength(50);
                 addressBuilder.Property(a => a.ZipCode).HasMaxLength(5).IsRequired();
+            });
+
+        builder.ComplexProperty(
+            o => o.BillingAddress, billingBuilder =>
+            {
+                billingBuilder.Property(b => b.FirstName).HasMaxLength(50).IsRequired();
+                billingBuilder.Property(b => b.LastName).HasMaxLength(50).IsRequired();
+                billingBuilder.Property(b => b.EmailAddress).HasMaxLength(50);
+                billingBuilder.Property(b => b.AddressLine).HasMaxLength(180).IsRequired();
+                billingBuilder.Property(b => b.Country).HasMaxLength(50);
+                billingBuilder.Property(b => b.State).HasMaxLength(50);
+                billingBuilder.Property(b => b.ZipCode).HasMaxLength(5).IsRequired();
             });
         
         builder.ComplexProperty(

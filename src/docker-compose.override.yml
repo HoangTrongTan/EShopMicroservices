@@ -33,6 +33,16 @@ services:
    - "5432:5432"
   volumes:
    - postgres_data_shop:/var/lib/postgresql/data/
+ orderdb:
+  container_name: orderdb
+  environment:
+   - ACCEPT_EULA=sa
+   - MSSQL_SA_PASSWORD=SwN12345678
+  restart: always
+  ports:
+   - "1433:1433"
+  volumes:
+   - mssql_data_shop:/var/opt/mssql
  # catalog.api:
  #   environment:
  #    - ASPNETCORE_ENVIRONMENT=Development
