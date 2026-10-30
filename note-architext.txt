@@ -48,3 +48,27 @@ EF Core Tools (Bộ công cụ chạy Migration) 🛠️
 NET Core CLI (Dành cho Terminal / Cross-platform) 🐧💻
 Package Manager Console - PMC
 
+DbSet và Set của FFCORE
+
+ApplyConfigurationsFromAssembly
+Assembly.GetExecutingAssembly()
+
+Strongly-Typed ID
+
+builder.Property(p => p.Id).HasConversion(..,..)
+
+HasIndex => đánh index
+
+Cơ chế Quan hệ (Relations) với cú pháp Has / With trong EF Core 8
+HasMany, HasOne
+WithOne, WithMany
+HasForeignKey
+
+Map Value Object trong DDD bằng [ComplexType] và ComplexProperty
+Tạo Class gắn mác [ComplexType]
+Đăng ký trong OnModelCreating bằng ComplexProperty -> Kết quả dưới Database:
+
+
+Map Value Object bằng ComplexProperty (Tính năng EF Core 8)
+
+
