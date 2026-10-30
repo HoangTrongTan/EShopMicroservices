@@ -1,3 +1,7 @@
+using Ordering.API;
+using Ordering.Application;
+using Ordering.Infrastructure;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add service to the container
@@ -7,10 +11,10 @@ var builder = WebApplication.CreateBuilder(args);
 //Application  - MediatR
 //API - Carter, HealthChecks,....
 
-//builder.Services
-//    .AddApplicationService()
-//    .AddInfrastructureService(builder.Configuration)
-//    .AddWebService();
+builder.Services
+    .AddApplicationServices()
+    .AddInfrastructureServices(builder.Configuration)
+    .AddApiServices();
 //----------------------
 var app = builder.Build();
 
