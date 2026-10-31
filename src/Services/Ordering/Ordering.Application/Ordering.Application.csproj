@@ -15,4 +15,8 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.22" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Orders\Queries\NewFolder\" />
+  </ItemGroup>
+
 </Project>
