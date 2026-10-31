@@ -11,3 +11,4 @@ global using Microsoft.AspNetCore.Builder;
 global using Microsoft.EntityFrameworkCore.Diagnostics;
 global using Microsoft.EntityFrameworkCore.ChangeTracking;
 global using Ordering.Domain.Abstractions;
+global using Ordering.Infrastructure.Data.Interceptors;
