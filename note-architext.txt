@@ -86,3 +86,17 @@ Assembly
 
 GetExecutingAssembly
 
+event sourcing Pattern
+Eventual Consistency Principle (nhất quán cuối cùng, nhấp nhận độ trễ đổi lấy hiệu năng) data luôn mới kh bị tranh chấp tài nguyên
+Write Database(event store), Read Database(Read Model / Materialized View) thằng trung gian để đồng data là RabitMq,Kafka
+CQRS kết hợp Event Sourcing Pattern
+
+
+mô hình Monolithic cũ
+
+Consistency Level(Strict Consistency (Nhất quán tuyệt đối), Eventual Consistency (Nhất quán cuối cùng))
+
+
+
+
+
