@@ -77,4 +77,6 @@ và default projet ở package console
 
 migrate method - automation
 
+EF Core Interceptors, SaveChanges Interception(SavingChanges, SavedChanges, ISaveChangesInterceptor)
+AddInterceptors, OnConfiguring, entry.References, TargetEntry.Metadata.IsOwned(), ChangeTracker
 
