@@ -96,7 +96,7 @@ mô hình Monolithic cũ
 
 Consistency Level(Strict Consistency (Nhất quán tuyệt đối), Eventual Consistency (Nhất quán cuối cùng))
 
-
+REPR Design Pattern
 
 
 
