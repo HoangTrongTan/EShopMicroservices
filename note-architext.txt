@@ -98,5 +98,9 @@ Consistency Level(Strict Consistency (Nhất quán tuyệt đối), Eventual Con
 
 REPR Design Pattern
 
+Reflection, Generics và interface
 
+PHÂN BIỆT 2 CÁI Dependency Injection (DI), DI container
+
+health-check sql
 
