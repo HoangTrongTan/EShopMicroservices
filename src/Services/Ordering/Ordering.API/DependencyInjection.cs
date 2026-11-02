@@ -1,8 +1,4 @@
-﻿using HealthChecks.UI.Client;
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-using Microsoft.Extensions.DependencyInjection;
-
-namespace Ordering.API;
+﻿namespace Ordering.API;
 
 public static class DependencyInjection
 {

@@ -104,3 +104,27 @@ PHÂN BIỆT 2 CÁI Dependency Injection (DI), DI container
 
 health-check sql
 
+***RabbitMQ
+Event Bus, MassTransit, Subscribe & Handle
+Async Microservices Communication, Publish/Subscribe Topic Exchange Model, BuildingBlocks.Messaging,
+
+Microservices Asynchronous Communication:
++) Không block thread
++) Giao thức AMQP (Advanced Message Queuing Protocol) 
++) Bắn và quên (Producer doesn't wait)
++) Decoupled
++) Message Broker, producer, consumer, idempotency consumers
++) Retry, Queue, FIFO, Exchange Types
++) Lưu trữ linh hoạt (Persisted / In-memory)
++) Fan-out, in parallel, Real-time processing, Change Data Capture, High volume events
+Benefits
++) Thêm Subscriber dễ dàng
++) Scalability
+
+KIẾN TRÚC RABITMQ:
+Producer 
+Broker:
+  +) Exchange: Direct(routing key), Fanout, Topic, và Headers
+  +) Bindings
+  +) Queues
+Consumer
