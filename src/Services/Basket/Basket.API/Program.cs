@@ -1,7 +1,3 @@
-using Discount.Grpc;
-using HealthChecks.UI.Client;
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-
 var builder = WebApplication.CreateBuilder(args);
 
 //Add service for container
@@ -49,6 +45,8 @@ builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(
 
     return handler;
 });
+
+builder.Services.AddMessageBroker(builder.Configuration);
 
 //Cross-cutting Service
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();

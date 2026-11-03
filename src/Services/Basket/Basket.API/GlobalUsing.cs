@@ -16,3 +16,7 @@ global using Microsoft.Extensions.Caching.Distributed;
 global using System.Text.Json;
 
 global using BuildingBlocks.Exceptions.Handler;
+global using Discount.Grpc;
+global using HealthChecks.UI.Client;
+global using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+global using BuildingBlocks.Messaging.MassTransit;
