@@ -128,3 +128,15 @@ Broker:
   +) Bindings
   +) Queues
 Consumer
+
+Transactional Outbox Pattern 
+vấn đề - Dual Write
+Kịch bản 1: (Publish trước, Xóa giỏ hàng sau).
+Kịch bản 2: (Xóa giỏ hàng trước, Publish sau).
+
+Nguyên tắc AICD.
+
+ Message Transmitter / Job.
+
+Mẫu Saga cho các giao dịch doanh nghiệp.
+

@@ -11,3 +11,8 @@ global using Ordering.Domain.Enums;
 global using MediatR;
 global using Microsoft.Extensions.Logging;
 global using Ordering.Domain.Events;
+global using BuildingBlocks.Behaviors;
+global using Microsoft.Extensions.DependencyInjection;
+global using System.Reflection;
+global using BuildingBlocks.Messaging.MassTransit;
+global using Microsoft.Extensions.Configuration;
