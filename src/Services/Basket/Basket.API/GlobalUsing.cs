@@ -22,3 +22,5 @@ global using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 global using BuildingBlocks.Messaging.MassTransit;
 
 global using Basket.API.Dtos;
+global using MassTransit;
+global using BuildingBlocks.Messaging.Events;
