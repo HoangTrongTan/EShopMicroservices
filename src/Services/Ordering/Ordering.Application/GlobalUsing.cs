@@ -16,3 +16,5 @@ global using Microsoft.Extensions.DependencyInjection;
 global using System.Reflection;
 global using BuildingBlocks.Messaging.MassTransit;
 global using Microsoft.Extensions.Configuration;
+global using BuildingBlocks.Messaging.Events;
+global using MassTransit;
