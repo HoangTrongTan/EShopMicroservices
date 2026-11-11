@@ -90,3 +90,15 @@ services:
   # volumes:
    # - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
    # - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+ messagebroker:
+   image: rabbitmq:management
+   container_name: messagebroker
+   hostname: ecommerce-mq
+   environment:
+    - RABBITMQ_DEFAULT_USER=guest
+    - RABBITMQ_DEFAULT_PASS=guest
+   restart: always
+   ports:
+    - "5672:5672"
+    - "15672:15672"
+   

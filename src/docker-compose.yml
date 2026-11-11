@@ -24,6 +24,8 @@ services:
    build:
     context: Services/Discount/Discount.Grpc
     dockerfile: Dockerfile
+ messagebroker:
+   image: rabbitmq:management
 
 volumes:
  postgres_data_shop:
