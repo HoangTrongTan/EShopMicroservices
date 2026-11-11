@@ -19,3 +19,4 @@ global using Microsoft.Extensions.Configuration;
 global using BuildingBlocks.Messaging.Events;
 global using MassTransit;
 global using Ordering.Application.Extensions;
+global using Microsoft.FeatureManagement;
