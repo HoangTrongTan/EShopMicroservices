@@ -1,5 +1,6 @@
 ﻿
 using BuildingBlocks.Pagination;
+using Ordering.Application.Extensions;
 
 namespace Ordering.Application.Orders.Queries.GetOrders;
 

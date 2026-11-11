@@ -1,4 +1,6 @@
 ﻿
+using Ordering.Application.Extensions;
+
 namespace Ordering.Application.Orders.Queries.GetOrdersByCustomer;
 
 public class GetOrdersByCustomerHandler

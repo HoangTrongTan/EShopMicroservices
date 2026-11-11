@@ -138,5 +138,6 @@ Nguyên tắc AICD.
 
  Message Transmitter / Job.
 
-Mẫu Saga cho các giao dịch doanh nghiệp.
+Mẫu Saga pattern for distributed transaction cho các giao dịch doanh nghiệp.(Exponential Backoff - Retry, idempotent,Quy trình End-to-End, giao dịch cục bộ, Compensating Transactions, CDC (Change Data Capture), Debezium).
 
+bounded context
