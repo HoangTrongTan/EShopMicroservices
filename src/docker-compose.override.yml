@@ -1,6 +1,7 @@
 version: '3.4'
 
 services:
+
  # catalogdb:
  #  container_name: catalogdb
  #  environment:
@@ -17,11 +18,15 @@ services:
  #  restart: always
  #  ports:
  #    - "6379:6379"
+ 
  distributedCache:
   container_name: distributedcache
   restart: always
   ports:
    - "6379:6379"
+  volumes:
+   - redis-data:/data
+
  basketdb:
   container_name: basketdb
   environment:
@@ -32,17 +37,33 @@ services:
   ports: 
    - "5432:5432"
   volumes:
-   - postgres_data_shop:/var/lib/postgresql/data/
+   - pg-data:/var/lib/postgresql/data/
+
  orderdb:
   container_name: orderdb
   environment:
-   - ACCEPT_EULA=sa
+   - ACCEPT_EULA=Y
    - MSSQL_SA_PASSWORD=SwN12345678
   restart: always
   ports:
    - "1433:1433"
   volumes:
-   - mssql_data_shop:/var/opt/mssql
+   - sql-dev-data:/var/opt/mssql
+
+ messagebroker:
+  image: rabbitmq:4-management-alpine
+  container_name: messagebroker
+  hostname: ecommerce-mq
+  environment:
+   - RABBITMQ_DEFAULT_USER=guest
+   - RABBITMQ_DEFAULT_PASS=guest
+  restart: always
+  ports:
+   - "5672:5672"
+   - "15672:15672"
+  volumes:
+   - rabbitmq-data:/var/lib/rabbitmq
+
  # catalog.api:
  #   environment:
  #    - ASPNETCORE_ENVIRONMENT=Development
@@ -66,17 +87,36 @@ services:
     - ConnectionStrings__Database=Server=basketdb;Port=5432;Database=BasketDb;User Id=postgres;Password=postgres;Include Error Detail=true 
     - ConnectionStrings__Redis=distributedCache:6379
     - GrpcSettings__DiscountUrl=http://discount.grpc:8080
+    - MessageBroker__Host=amqp://messagebroker:5672
+    - MessageBroker__UserName=guest
+    - MessageBroker__Password=guest
+    - FeatureManagement__OrderFullfilment=true
    ports:
     - "6001:8080"
    depends_on:
     - basketdb
     - distributedCache
     - discount.grpc
+    - messagebroker
     # - "5051:8081"
    # volumes:
     # - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
     # - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
     
+ ordering.api:
+  environment:
+   - ASPNETCORE_ENVIRONMENT=Development
+   - ASPNETCORE_HTTP_PORTS=8080
+   - ConnectionStrings__Database=Server=orderdb,1433;Database=OrderDb;User Id=sa;Password=SwN12345678;Encrypt=False;TrustServerCertificate=True;
+   - MessageBroker__Host=amqp://messagebroker:5672
+   - MessageBroker__UserName=guest
+   - MessageBroker__Password=guest
+   - FeatureManagement__OrderFullfilment=true
+  ports:
+   - "6003:8080"
+  depends_on:
+   - orderdb
+   - messagebroker
  discount.grpc:
   container_name: discount.grpc
   environment:
@@ -90,15 +130,3 @@ services:
   # volumes:
    # - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
    # - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
- messagebroker:
-   image: rabbitmq:management
-   container_name: messagebroker
-   hostname: ecommerce-mq
-   environment:
-    - RABBITMQ_DEFAULT_USER=guest
-    - RABBITMQ_DEFAULT_PASS=guest
-   restart: always
-   ports:
-    - "5672:5672"
-    - "15672:15672"
-   

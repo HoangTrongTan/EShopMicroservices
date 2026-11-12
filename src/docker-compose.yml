@@ -1,36 +1,46 @@
 version: '3.4'
 
 services:
+
  # catalogdb:
  #  image: postgres:17-alpine
+
  basketdb:
   image: postgres:17-alpine
  orderdb:
-  image: mcr.microsoft.com/mssql/server:2022-latest
+  image: mcr.microsoft.com/azure-sql-edge:latest
  distributedCache:
-  image: redis
+  image: redis:7-alpine
+ messagebroker:
+   image: rabbitmq:4-management-alpine
+
  # catalog.api:
  #   image: ${DOCKER_REGISTRY-}catalogapi
  #   build:
  #    context: .
  #    dockerfile: Services/Catalog/Catalog.API/Dockerfile
+
  basket.api:
    image: ${DOCKER_REGISTRY-}basketapi
    build:
     context: .
     dockerfile: Services/Basket/Basket.API/Dockerfile
+
+ ordering.api:
+   image: ${DOCKER_REGISTRY-}orderingapi
+   build:
+    context: .
+    dockerfile: Services/Ordering/Ordering.API/Dockerfile
+
  discount.grpc:
    image: ${DOCKER_REGISTRY-}discountgrpc
    build:
     context: Services/Discount/Discount.Grpc
     dockerfile: Dockerfile
- messagebroker:
-   image: rabbitmq:management
+
 
 volumes:
- postgres_data_shop:
- mssql_data_shop:
-
-
-
-
+ pg-data:
+ sql-dev-data:
+ rabbitmq-data:
+ redis-data:
