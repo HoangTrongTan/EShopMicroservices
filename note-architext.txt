@@ -153,5 +153,7 @@ Plug-and-Play(ISessionAffinityPolicy, ILoadBalancingPolicy, IHttpForwarder, ...)
 Cần tích hợp:
 - "Câu 7 · Mở rộng. Trong kiến trúc YARP (Yet Another Reverse Proxy) dựa trên cấu hình, nếu bạn cần thực hiện thay đổi logic định tuyến (routing) dựa trên giá trị của một Header tùy chỉnh (ví dụ: 'X-Tenant-ID') thay vì chỉ dựa trên đường dẫn (path) tại thời điểm runtime, phương pháp nào sau đây là tối ưu và tuân thủ nguyên tắc thiết kế của YARP?
 ".
+- "Câu 7 · Mở rộng. Trong kiến trúc YARP API Gateway sử dụng ASP.NET Core Rate Limiting, nếu bạn muốn triển khai cơ chế 'Token Bucket' để cho phép các yêu cầu bùng nổ (burst) trong thời gian ngắn thay vì giới hạn cứng như 'Fixed Window', bạn cần thực hiện thay đổi nào trong cấu hình Dependency Injection?"
+
 
 Loại bỏ tiền tố prefix trong pathRemovePrefix của Transform.
