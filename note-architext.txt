@@ -141,3 +141,16 @@ Nguyên tắc AICD.
 Mẫu Saga pattern for distributed transaction cho các giao dịch doanh nghiệp.(Exponential Backoff - Retry, idempotent,Quy trình End-to-End, giao dịch cục bộ, Compensating Transactions, CDC (Change Data Capture), Debezium, Feature Management).
 
 bounded context
+
+Gateway Routing Pattern, Blue/Green hoặc Canary Deployment, gradually shift, session stickiness, Aggregator, Cross-cutting concerns, Round-Robin, Facade Pattern, Layer 7, Gateway Offloading.
+Rủi ro: SPOF, Anti-Pattern, chatty communication, latency, BFF(chia gateway theo nền tảng).
+
+kỹ thuật bất đồng bộ (asynchronous), timeout, hoặc Circuit Breaker để tránh làm cạn kiệt tài nguyên của Gateway, Session Affinity, sticky sessions.
+
+IRB Architech: Destination Enumeration, 
+Plug-and-Play(ISessionAffinityPolicy, ILoadBalancingPolicy, IHttpForwarder, ...), Power of Two Choices, X-Tenant-ID.
+
+Cần tích hợp:
+- "Câu 7 · Mở rộng. Trong kiến trúc YARP (Yet Another Reverse Proxy) dựa trên cấu hình, nếu bạn cần thực hiện thay đổi logic định tuyến (routing) dựa trên giá trị của một Header tùy chỉnh (ví dụ: 'X-Tenant-ID') thay vì chỉ dựa trên đường dẫn (path) tại thời điểm runtime, phương pháp nào sau đây là tối ưu và tuân thủ nguyên tắc thiết kế của YARP?
+".
+

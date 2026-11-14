@@ -26,6 +26,11 @@ services:
    - "6379:6379"
   volumes:
    - redis-data:/data
+  healthcheck:
+   test: ["CMD", "redis-cli", "ping"]
+   interval: 10s
+   retries: 5
+   timeout: 5s
 
  basketdb:
   container_name: basketdb
@@ -38,6 +43,11 @@ services:
    - "5432:5432"
   volumes:
    - pg-data:/var/lib/postgresql/data/
+  healthcheck:
+    test: ["CMD-SHELL", "pg_isready -U postgres -d BasketDb"]
+    interval: 10s
+    timeout: 5s
+    retries: 5
 
  orderdb:
   container_name: orderdb
@@ -49,6 +59,15 @@ services:
    - "1433:1433"
   volumes:
    - sql-dev-data:/var/opt/mssql
+  healthcheck:
+   test: ["CMD-SHELL", "/opt/mssql-tools/bin/sqlcmd -S localhost - U sa -P 'SwN12345678' -Q 'SELECT 1' || exit 1"]
+   # -S chỉ định Server cần connect, ở đây là localhost
+   # /opt/.. đường dân tới công cụ dòng lệnh
+   # -U sa tên tài khoản
+   # -Q query thử
+   interval: 10s
+   retries: 5
+   timeout: 5s
 
  messagebroker:
   image: rabbitmq:4-management-alpine
@@ -63,6 +82,11 @@ services:
    - "15672:15672"
   volumes:
    - rabbitmq-data:/var/lib/rabbitmq
+  healthcheck:
+   test: ["CMD", "rabbitmq-diagnostics", "check_running"]
+   interval: 10s
+   retries: 5
+   timeout: 5s
 
  # catalog.api:
  #   environment:
@@ -91,13 +115,24 @@ services:
     - MessageBroker__UserName=guest
     - MessageBroker__Password=guest
     - FeatureManagement__OrderFullfilment=true
+    
    ports:
     - "6001:8080"
    depends_on:
-    - basketdb
-    - distributedCache
-    - discount.grpc
-    - messagebroker
+    basketdb:
+     condition: service_healthy
+    distributedCache:
+     condition: service_healthy
+    discount.grpc:
+     condition: service_started
+    messagebroker:
+     condition: service_healthy
+   healthcheck:
+    test: ["CMD-SHELL", "curl -f http://localhost:8080/health || exit 1"]
+    # -f là --fail nếu error code thì sẽ ngắt
+    interval: 10s
+    retries: 5
+    timeout: 5s
     # - "5051:8081"
    # volumes:
     # - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
@@ -112,21 +147,39 @@ services:
    - MessageBroker__UserName=guest
    - MessageBroker__Password=guest
    - FeatureManagement__OrderFullfilment=true
+   
   ports:
    - "6003:8080"
   depends_on:
-   - orderdb
-   - messagebroker
+   orderdb:
+    condition: service_healthy
+   messagebroker:
+    condition: service_healthy
+  healthcheck:
+   test: ["CMD-SHELL", "curl -f http://localhost:8080/health || exit 1"]
+   interval: 10s
+   retries: 5
+   timeout: 5s
+
  discount.grpc:
   container_name: discount.grpc
   environment:
    - ASPNETCORE_ENVIRONMENT=Development
    - ASPNETCORE_HTTP_PORTS=8080
    # - ASPNETCORE_HTTPS_PORTS=8081
-   - ConnectionStrings__Database=Data Source=discountdb
+   - ConnectionStrings__Database=Data Source=/app/data/discountdb
+   # để folder đúng config ở docker
   ports:
    - "6002:8080"
    # - "8081"
+  volumes:
+   - sql-lite-data:/app/data
+  healthcheck:
+   test: ["CMD-SHELL", "curl -f http://localhost:8080/health || exit 1"]
+   interval: 10s
+   retries: 5
+   timeout: 5s
+
   # volumes:
    # - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
    # - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro

@@ -44,3 +44,4 @@ volumes:
  sql-dev-data:
  rabbitmq-data:
  redis-data:
+ sql-lite-data:

@@ -4,6 +4,14 @@
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 USER app
 WORKDIR /app
+
+# Tạo folder data để mount volume
+RUN mkdir -p /app/data && chown -R app:app /app/data
+# chown lệnh đổi quyền của linux
+# -p đổi chủ sở hữu của thư mục /app/data sang user app
+# app trước(app:) lền tên User mới sẽ làm chủ sở hữu
+# app sau (:app) là tên Group mới sẽ làm chủ sở hữu
+
 EXPOSE 8080
 EXPOSE 8081
 
