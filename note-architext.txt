@@ -154,3 +154,4 @@ Cần tích hợp:
 - "Câu 7 · Mở rộng. Trong kiến trúc YARP (Yet Another Reverse Proxy) dựa trên cấu hình, nếu bạn cần thực hiện thay đổi logic định tuyến (routing) dựa trên giá trị của một Header tùy chỉnh (ví dụ: 'X-Tenant-ID') thay vì chỉ dựa trên đường dẫn (path) tại thời điểm runtime, phương pháp nào sau đây là tối ưu và tuân thủ nguyên tắc thiết kế của YARP?
 ".
 
+Loại bỏ tiền tố prefix trong pathRemovePrefix của Transform.
