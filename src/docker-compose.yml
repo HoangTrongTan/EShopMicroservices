@@ -2,8 +2,8 @@ version: '3.4'
 
 services:
 
- # catalogdb:
- #  image: postgres:17-alpine
+ catalogdb:
+  image: postgres:17-alpine
 
  basketdb:
   image: postgres:17-alpine
@@ -12,13 +12,13 @@ services:
  distributedCache:
   image: redis:7-alpine
  messagebroker:
-   image: rabbitmq:4-management-alpine
+  image: rabbitmq:4-management-alpine
 
- # catalog.api:
- #   image: ${DOCKER_REGISTRY-}catalogapi
- #   build:
- #    context: .
- #    dockerfile: Services/Catalog/Catalog.API/Dockerfile
+ catalog.api:
+  image: ${DOCKER_REGISTRY-}catalogapi
+  build:
+   context: .
+   dockerfile: Services/Catalog/Catalog.API/Dockerfile
 
  basket.api:
    image: ${DOCKER_REGISTRY-}basketapi

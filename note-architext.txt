@@ -157,3 +157,11 @@ Cần tích hợp:
 
 
 Loại bỏ tiền tố prefix trong pathRemovePrefix của Transform.
+
+Kiểm tra docker network inspect src_default: thằng có trong mạng này kh.
+docker network connect src_default basketdb: gán mạng cho container.
+docker inspect basketdb --format='{{json .NetworkSettings.Networks}}' kiểm tra xem container mang mạng nào.
+
+
+
+

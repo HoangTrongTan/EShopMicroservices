@@ -2,22 +2,17 @@ version: '3.4'
 
 services:
 
- # catalogdb:
- #  container_name: catalogdb
- #  environment:
- #   - POSTGRES_USER=postgres
- #   - POSTGRES_PASSWORD=postgres
- #   - POSTGRES_DB=CatalogDb
- #  restart: always
- #  ports: 
- #   - "5432:5432"
- #  volumes:
- #   - postgres_catalog:/var/lib/postgresql/data/
- # distributedCache:
- #  container_name: distributedcache
- #  restart: always
- #  ports:
- #    - "6379:6379"
+ catalogdb:
+  container_name: catalogdb
+  environment:
+   - POSTGRES_USER=postgres
+   - POSTGRES_PASSWORD=postgres
+   - POSTGRES_DB=CatalogDb
+  restart: always
+  ports: 
+   - "5432:5432"
+  volumes:
+   - pg-data:/var/lib/postgresql/data/
  
  distributedCache:
   container_name: distributedcache
@@ -40,7 +35,7 @@ services:
    - POSTGRES_DB=BasketDb
   restart: always
   ports: 
-   - "5432:5432"
+   - "5434:5432"
   volumes:
    - pg-data:/var/lib/postgresql/data/
   healthcheck:
@@ -88,20 +83,15 @@ services:
    retries: 5
    timeout: 5s
 
- # catalog.api:
- #   environment:
- #    - ASPNETCORE_ENVIRONMENT=Development
- #    - ASPNETCORE_HTTP_PORTS=8080
- #    - ASPNETCORE_HTTPS_PORTS=8081
- #    - ConnectionStrings__Database=Server=192.168.17.131;Port=5432;Database=CatalogDb;User Id=postgres;Password=postgres;Include Error Detail=true 
- #   depends_on:
- #    - catalogdb
- #   ports:
- #    - "6000:8080"
- #    - "6060:8081"
- #   volumes:
- #    - ${HOME}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
- #    - ${HOME}/ASP.NET/Https:/home/app/.aspnet/https:ro
+ catalog.api:
+  environment:
+   - ASPNETCORE_ENVIRONMENT=Development
+   - ASPNETCORE_HTTP_PORTS=8080
+   - ConnectionStrings__Database=Server=catalogdb;Port=5432;Database=CatalogDb;User Id=postgres;Password=postgres;Include Error Detail=true 
+  depends_on:
+   - catalogdb
+  ports:
+   - "6000:8080"
 
  basket.api:
    environment:
@@ -115,7 +105,6 @@ services:
     - MessageBroker__UserName=guest
     - MessageBroker__Password=guest
     - FeatureManagement__OrderFullfilment=true
-    
    ports:
     - "6001:8080"
    depends_on:
@@ -179,7 +168,3 @@ services:
    interval: 10s
    retries: 5
    timeout: 5s
-
-  # volumes:
-   # - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
-   # - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
